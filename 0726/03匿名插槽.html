@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <child>
+        <!-- 匿名插槽 -->
+          11111
+        </child>
+    </div>
+</body>
+<script>
+Vue.component("child",{
+    template:`
+     <div>
+         <div>我是组件</div>
+         <slot>如果没有内容则显示我(默认值)</slot>
+     </div>
+    `,
+})
+new Vue({
+    el:"#app",
+    data:{
+
+    }
+})
+</script>
+</html>

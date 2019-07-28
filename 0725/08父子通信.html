@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <list :data="msg"></list>
+    </div>
+</body>
+<script>
+    // 父子通信
+    // 全局组件
+    Vue.component("list", {
+        props: ["data"],
+        template: `
+        <div>
+            <div>我是全局组件--------{{parentInfo}}</div>
+            <div>
+                <button @click="change">change</button>
+            </div>
+            <div>{{data}}</div>
+        </div>
+        `,
+        data() {
+            return {
+                parentInfo: "我是父组件"
+            }
+        },
+        methods: {
+            change() {
+                this.parentInfo = "2222"
+            }
+        }
+    })
+    new Vue({
+        el: "#app",
+        data: {
+            msg: "我是小鱼"
+        },
+        methods: {
+
+        }
+    })
+</script>
+
+</html>

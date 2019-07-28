@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./vuedemo/vue.min.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #app {
+            width: 500px;
+            margin: 50px auto;
+            background-color: lightblue;
+        }
+
+        .list {
+            height: 500px;
+            margin: 20px;
+            border: 1px solid gold;
+            overflow-y: auto;
+        }
+
+        .list li {
+            list-style: none;
+            margin-bottom: 10px;
+            background-color: #fff;
+        }
+
+        .user {
+            color: yellowgreen;
+        }
+
+        .con_body {
+            text-indent: 35px;
+        }
+
+        .time {
+            text-align: right;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='app'>
+        <div class="con">
+            用户：<input type="text" v-model='name'><br />
+            内容：<input type="text" v-model='user_con' class="con_wri" @keydown.enter='add'><br />
+            <button @click="add">发表</button>
+        </div>
+        <ul class="list">
+            <li v-for="(item,index) in arr">
+                <div class="user">{{item.user}}</div>
+                <div class="con_body">{{item.con_body}}</div>
+                <div class="time">{{item.time}}</div>
+                <button @click="del(index)">删除</button>
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            arr: [
+                {
+                    user: 'tom',
+                    con_body: '啊啊啊啊啊啊啊啊啊啊啊啊啊',
+                    time: '2018-8-8 08:08:08'
+                },
+                {
+                    user: 'Bob',
+                    con_body: '啦啦啦啦啦啦啦啦啦啦啦啦',
+                    time: '2019-12-26 08:08:08'
+                }
+            ],
+            name: '',
+            user_con: ''
+        },
+        methods: {
+            add() {
+                var date = new Date();
+                var y = date.getFullYear();
+                var MM = date.getMonth() + 1;
+                MM = MM < 10 ? ('0' + MM) : MM;
+                var d = date.getDate();
+                d = d < 10 ? ('0' + d) : d;
+                var h = date.getHours();
+                h = h < 10 ? ('0' + h) : h;
+                var m = date.getMinutes();
+                m = m < 10 ? ('0' + m) : m;
+                var s = date.getSeconds();
+                s = s < 10 ? ('0' + s) : s;
+                var obj = {
+                    user: this.name,
+                    con_body: this.user_con,
+                    time: y + '-' + MM + '-' + d + ' ' + h + ':' + m + ':' + s
+                }
+                this.arr.unshift(obj)
+                this.name = ''
+                this.user_con = ''
+            },
+            del: function (index) {
+                this.arr.splice(index, 1)
+            }
+        }
+    })
+</script>
+
+</html>

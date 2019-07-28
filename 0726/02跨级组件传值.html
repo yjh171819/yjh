@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./vue.min.js"></script>
+</head>
+
+<body>
+    <!-- provide inject  跨级组件传值   2.6-->
+    <div id="app">
+        <rap ></rap>
+    </div>
+    <script>
+        Vue.component('rap', {
+            provide:{
+                name:"asda"
+            },
+            template: `
+            <div>第一个
+              <sing></sing>
+            </div>
+            `,   
+        })
+        Vue.component('sing', {
+            inject:["name"],
+            template: `
+            <div>
+              第二个{{name}}
+              <red></red>   
+            </div>
+            `,
+            components:{
+            "red":{
+            template: `
+            <div>第三个
+                {{name}}
+            </div>
+            ` ,
+            inject:["name"],
+            }
+         }
+        })
+
+        new Vue({
+            el: '#app',
+            data: {
+
+            }
+        })
+    </script>
+</body>
+
+<ml>

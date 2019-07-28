@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./vue.min.js"></script>
+</head>
+<body>
+   <div id="wrap">
+       <button @click="show">change</button>
+       {{msg}}
+       <button @click="destory">销毁</button>
+       
+   </div>
+</body>
+<script>
+ var vm=new Vue({
+      el:"#wrap",
+      data:{
+      msg:"数据",
+      flag:true
+      },
+      methods:{
+      show(){
+          if(this.flag){
+              this.msg="新数据"
+              this.flag=false
+          }else{
+            this.msg="数据"
+            this.flag=true
+          }
+      },
+      destory(){
+          vm.$destroy()
+      }
+
+
+      },
+      beforeCreate(){
+          console.log("实例创建之前")
+      },
+      created(){
+          console.log("实例已经创建")
+      },
+      beforeMount(){
+        console.log("实例挂载之前")
+      },
+      mounted(){
+          console.log("已经挂载")
+      },
+      beforeUpdate(){
+        console.log("实例更新之前")
+      },
+      updated(){
+        console.log("已经更新") 
+      },
+      beforeDestroy(){
+        console.log("实例销毁之前")  
+      },
+      destroyed(){
+        console.log("已经销毁")  
+      }
+  })
+
+</script>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script type="text/javascript" src="./vue.min.js"></script>
+</head>
+
+<body>
+  <div id="wrap">
+    <button @click="show">change</button>
+    {{msg}}
+    <button @click="destory">销毁</button>
+
+  </div>
+</body>
+<script>
+  var vm = new Vue({
+    el: "#wrap",
+    data: {
+      msg: "数据",
+      flag: true
+    },
+    methods: {
+      show() {
+        if (this.flag) {
+          this.msg = "新数据"
+          this.flag = false
+        } else {
+          this.msg = "数据"
+          this.flag = true
+        }
+      },
+      destory() {
+        vm.$destroy()
+      }
+
+
+    },
+    //   %c 输出 %s 字符串 %d 数字  %f 浮点数
+    beforeCreate() {
+      console.group("实例创建之前")
+      console.log("%c%s", "color:red", "实例创建之前" + this.$el)
+      console.log("实例创建之前" + this.$data)
+      console.log("实例创建之前" + this.msg)
+    },
+    created() {
+      console.group("实例已经创建")
+      console.log("实例已经创建" + this.$el)
+      console.log("实例已经创建" + this.$data)
+      console.log("实例已经创建" + this.msg)
+    },
+    beforeMount() {
+      console.group("实例挂载之前")
+      console.log("实例挂载之前")
+      console.log("实例挂载之前" + this.$el)
+      console.log("实例挂载之前" + this.$data)
+      console.log("实例挂载之前" + this.msg)
+    },
+    mounted() {
+      console.group("已经挂载")
+      console.log("已经挂载" + this.$el)
+      console.log("已经挂载" + this.$data)
+      console.log("已经挂载" + this.msg)
+    },
+    beforeUpdate() {
+      console.group("实例更新之前")
+      console.log("实例更新之前" + this.$el)
+      console.log("实例更新之前" + this.$data)
+      console.log("实例更新之前" + this.msg)
+    },
+    updated() {
+      console.group("已经更新")
+      console.log("已经更新" + this.$el)
+      console.log("已经更新" + this.$data)
+      console.log("已经更新" + this.msg)
+    },
+    beforeDestroy() {
+      console.group("实例销毁之前")
+      console.log("实例销毁之前" + this.$el)
+      console.log("实例销毁之前" + this.$data)
+      console.log("实例销毁之前" + this.msg)
+    },
+    destroyed() {
+      console.group("已经销毁")
+      console.log("已经销毁" + this.$el)
+      console.log("已经销毁" + this.$data)
+      console.log("已经销毁" + this.msg)
+    }
+  })
+
+</script>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.min.js" type="text/javascript">
+    </script>
+    <style>
+    .fade-enter,.fade-leave-to{
+      opacity: 0;
+    }
+    .fade-enter-active,.fade-leave-active{
+        transition: all 2s ease;
+    }
+    </style>
+</head>
+<body>
+   <div id="app">
+       <button @click="flag=!flag">动画</button>
+       <transition name="fade">
+         <div v-show="flag" style="width: 100px;height: 100px; background: aquamarine"></div>
+       </transition>
+   </div> 
+   <script>
+   new Vue({
+     el:"#app", 
+     data:{
+         flag:false
+     },
+     methods:{
+    //   toggle(){
+    //       this.flag=!this.flag
+    //   }
+     }
+   })
+   </script>
+</body>
+</html>

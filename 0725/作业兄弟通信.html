@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./vue.min.js">
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <custom :list="arr" btn="查询"></custom>
+        <custom :list="arr" btn="搜索"></custom>
+    </div>
+</body>
+<script>
+    Vue.component("custom", {
+       props:["list","btn"],
+       template: `
+            <div>
+                <input type="text" v-model="value" @click="toggle"/>
+                <input type="button" :value="btn"/>
+                <list v-show="hide" :data="list" @receve="get"></list>
+            </div>
+                `,
+        data() {
+            return {
+                hide: true,
+                value: ""
+            }
+        },
+        methods: {
+            toggle() {
+                this.hide = !this.hide
+            },
+            get(val) {
+                this.value = val
+            }
+        }
+    })
+    Vue.component("list", {
+        props: ["data"],
+        template: `
+            <div>
+              <ul>
+                <li v-for="item in data" @click="check(item)">{{item}}</li>
+              </ul>
+            </div>
+                  `,
+        methods: {
+            check(item) {
+                this.$emit("receve", item)
+            }
+        }
+    })
+    new Vue({
+        el: "#app",
+        data: {
+            arr: ["vue","react","node"]
+        }
+    })
+</script>
+
+</html>

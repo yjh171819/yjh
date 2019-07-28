@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./vue.min.js">
+    </script>
+</head>
+<body>
+    <div id="app">
+        <brother-one></brother-one>
+        <brother-two></brother-two>
+    </div>
+</body>
+<script>
+// 兄弟通信
+var vm=new Vue()
+Vue.component("brotherOne",{
+    template:`
+    <div>
+    <div>我是哥哥</div>
+    <button @click="send">send</button>
+    </div>
+    `,
+    data(){
+        return{
+            info:"我是哥哥的信息"
+        }
+    },
+    methods:{
+        send(){
+            vm.$emit("receve",this.info)
+        }
+    }
+})
+Vue.component("brotherTwo",{
+    template:`
+    <div>
+    <div>我是弟弟{{getone}}</div>
+    </div>
+    `,
+    data(){
+        return{
+           getone:""
+        }
+    },
+   mounted(){
+       vm.$on("receve",function(val){
+       console.log(arguments)
+       this.getone=val
+       }.bind(this))
+    //    或者箭头函数
+    }
+})
+new Vue({
+    el:"#app",
+    data:{
+        msg:""
+    },
+    methods:{}
+})
+</script>
+</html>

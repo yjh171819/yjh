@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+     .box{
+         width: 200px;
+         height: 400px;
+         background: rebeccapurple;
+     }
+     .xiala-enter, .xiala-leave-to{
+         height: 0px;
+     }
+     .xiala-enter-active, .xiala-leave-active{
+         transition:all 1s ease;
+     }
+    </style>
+    <script type="text/javascript" src="vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="toggle">动画</button>
+        <transition name="xiala">
+           <div class="box" v-show="hide"></div>
+        </transition>
+    </div>
+</body>
+<script>
+new Vue({
+    el:"#app",
+    data:{
+    hide:false
+    },
+    methods: {
+        toggle(){
+            this.hide=!this.hide
+        }
+    },
+})
+</script>
+</html>

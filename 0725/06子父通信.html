@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./vue.min.js">
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        {{getinfo}}
+        <list :data="msg" @receve="getchild"></list>
+    </div>
+</body>
+<script>
+    // 子父通信
+    // 全局组件
+    Vue.component("list", {
+        props:{
+            data:{
+                type:String,
+            }
+        },
+        template: `
+        <div>
+            <div>我是全局组件----{{parentInfo}}</div>
+            <div>
+                <button @click="change">change</button>
+            </div>
+             <div>{{data}}</div>
+       </div>
+        `,
+        data() {
+            return {
+                parentInfo: "我是父组件"
+            }
+        },
+        methods: {
+            change(){
+                this.$emit("receve",this.parentInfo)
+                // $emit自定义事件   事件名称   数据  元素的本身去写
+
+            }
+        }
+    })
+    new Vue({
+        el: "#app",
+        data: {
+            msg: "我是小鱼",
+            getinfo:""
+        },
+        methods:{
+            getchild(val){
+                console.log(arguments)
+                this.getinfo=val
+            }
+        }
+    })
+</script>
+
+</html>

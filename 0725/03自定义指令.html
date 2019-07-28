@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-red style="width:100px;height:100px;border:1px solid #ccc"></div>
+    </div>
+</body>
+<script>
+// 通过指令让对应的div背景颜色变成红色
+// 全局自定义指令
+// Vue.directive("red",function(el){
+//     console.log(arguments)
+//     el.style.background="#f00"
+// })
+new Vue({
+    el:"#app",
+    data:{
+
+    },
+    // 局部自定义指令
+    directives:{
+        "red":{
+            bind(el){
+                el.style.background="#f00"
+                console.log(arguments)
+            }
+        }
+    }
+})
+</script>
+</html>

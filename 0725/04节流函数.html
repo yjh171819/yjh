@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-red="change" v-model="num" />
+    </div>
+</body>
+<script>
+    // 节流函数
+    Vue.directive('red',{
+        inserted(el,binding){
+        // console.log(el)
+            var timer
+        el.addEventListener('keydown',()=>{
+            if(timer){
+                clearTimeout(timer)
+            }
+            timer=setTimeout(function(){
+                console.log(binding)
+                binding.value()
+            },500)
+            // 500指的是值的变化过程,不是敲键盘的过程
+        })
+      }
+    })
+    new Vue({
+        el:'#app',
+        data:{
+            num:"1"
+        },
+        methods:{
+            change(){
+                this.num++
+                console.log(this.num)
+            }
+        }
+    })
+</script>
+<html>
